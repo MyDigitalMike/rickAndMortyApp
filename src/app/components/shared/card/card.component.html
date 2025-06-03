@@ -1,0 +1,37 @@
+<div class="d-flex flex-column align-items-center justify-content-center mx-5">
+  <div class="d-flex flex-wrap justify-content-center gap-4">
+    <div class="card text-center bg-dark text-white" *ngFor="let character of character" style="width: 18rem;">
+      <div class="card-header">
+        {{ character.name }}
+      </div>
+      <img class="card-img-top rounded-0" [src]="character.image" alt="{{ character.name }}" />
+      <div class="card-body">
+        <p class="card-text"><span class="badge" [ngClass]="{
+          'bg-success': character.status === 'Alive',
+          'bg-danger': character.status === 'Dead',
+          'bg-secondary': character.status === 'unknown'
+        }">{{ character.status }}</span></p>
+        <div class="accordion " id="accordionExample">
+          <div class="accordion-item ">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne'+character.id"
+                aria-expanded="true" [attr.aria-controls]="'collapseOne'+character.id">
+                About - {{ character.name }}
+              </button>
+            </h2>
+            <div id="collapseOne{{character.id}}" class="accordion-collapse collapse bg-dark text-white" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p class="card-text">Species: {{ character.species }}</p>
+                <p class="card-text">Gender: {{ character.gender }}</p>
+                <p class="card-text">Origin: {{ character.origin.name }}</p>
+                <p class="card-text">Location: {{ character.location.name }}</p>
+                <p class="card-text">Episodes: {{ character.episode.length }}</p>
+                <p class="card-text">Created: {{ character.created | date:'short' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
